@@ -10,7 +10,7 @@ import todoist
 
 def get_outlook_calendar_entries(days = 1):
     """
-    Returns calender entries for days default is 1
+    Returns calender entries for 'days' period
     """
     Outlook = win32.Dispatch('outlook.application')    
     
@@ -30,7 +30,7 @@ def get_outlook_calendar_entries(days = 1):
     print(filter)
     
     appointments = appointments.Restrict(filter)
-    events=[]
+    events = []
     
     for a in appointments:
         #print("from appointment " + str(a.Start))
@@ -42,10 +42,12 @@ def get_outlook_calendar_entries(days = 1):
 
 # == Main =====
 
+INI_FILE_NAME = "OutlookCal2Todoist.ini"
+
 print("Start")
 
 config = configparser.ConfigParser()
-config.read("OutlookCalendarToTodoist.ini")
+config.read(INI_FILE_NAME)
 
 api_token = config["todoist"]["api_token"]
 api_base_url = config["todoist"]["api_base_url"]
