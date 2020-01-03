@@ -1,0 +1,13 @@
+### Python ###
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test and temporary scripts
+test*.py
+Test/
+
+# ini file with private data
+OutlookCal2Todoist.ini
