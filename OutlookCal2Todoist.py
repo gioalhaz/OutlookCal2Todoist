@@ -66,9 +66,15 @@ events = get_outlook_calendar_entries(days_count)
 td_api.delete_tasks(project_id)
 
 if len(events) != 0:
+
+    time_now = datetime.datetime.now().replace(tzinfo=timezone(datetime.timedelta(seconds=time.localtime().tm_gmtoff)))
     for event in events:
         content = event[1] if len(event[3]) == 0 else f"{event[1]} ({event[3]})"
-        date_string = event[0].isoformat("T")
-        td_api.add_new_task(project_id, content, date_string, label_id)
+
+        #print(f"{event[0]}  {type(event[0])})")
+        if event[0] > time_now:
+            #print("yes")
+            date_string = event[0].isoformat("T")
+            td_api.add_new_task(project_id, content, date_string, label_id)
 else:
     print(f"There is no events in {days_count} days period")
