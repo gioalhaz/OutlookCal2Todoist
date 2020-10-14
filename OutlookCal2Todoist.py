@@ -4,6 +4,7 @@ import locale
 import win32com.client as win32
 import time
 import datetime
+import os
 from datetime import timezone
 import todoist
 
@@ -46,8 +47,11 @@ INI_FILE_NAME = "OutlookCal2Todoist.ini"
 
 print("Start")
 
+#script_dir = os.path.dirname(__file__) + os.sep
+script_dir = ""
+
 config = configparser.ConfigParser()
-config.read(INI_FILE_NAME)
+config.read(script_dir + INI_FILE_NAME)
 
 api_token = config["todoist"]["api_token"]
 api_base_url = config["todoist"]["api_base_url"]
