@@ -35,7 +35,7 @@ def get_outlook_calendar_entries(days = 1):
 
     for a in appointments:
         #print("from appointment " + str(a.Start))
-        event_date = a.Start.replace(tzinfo=timezone(datetime.timedelta(seconds=time.localtime().tm_gmtoff)))
+        event_date = a.Start.replace(tzinfo=None)
         events_list.append([event_date, a.Subject, a.Duration, a.Location])
 
     return events_list
@@ -73,7 +73,7 @@ try:
 
     if len(events) != 0:
 
-        time_now = datetime.datetime.now().replace(tzinfo=timezone(datetime.timedelta(seconds=time.localtime().tm_gmtoff)))
+        time_now = datetime.datetime.now()
         for event in events:
             content = event[1] if len(event[3]) == 0 else f"{event[1]} ({event[3]})"
 

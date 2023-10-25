@@ -50,9 +50,10 @@ class Todoist:
     def delete_tasks(self, filter_project_id, filter_label_id = None):
 
         task_list = self.get_active_tasks(filter_project_id, filter_label_id)
-        for task in task_list:
-            #print("Task ID: " + str(task["id"]))
-            self.delete_task(task["id"])
+        if task_list != None:
+            for task in task_list:
+                #print("Task ID: " + str(task["id"]))
+                self.delete_task(task["id"])
 
 
 
@@ -66,6 +67,10 @@ class Todoist:
 
         url = self._get_tasks_url()
         response = requests.get(url, params, headers=self.auth_header, verify=self.verify_ssl)
+
+        # 410 -- Resource is gone
+        if response.status_code == 410:
+            return None
 
         if response.status_code != 200:
             response.raise_for_status()
