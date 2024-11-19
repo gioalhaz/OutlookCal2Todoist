@@ -11,5 +11,6 @@ Test/
 
 # ini file with private data
 OutlookCal2Todoist.ini
-run.bat
-errors.log
+*.bat
+*.log
+
